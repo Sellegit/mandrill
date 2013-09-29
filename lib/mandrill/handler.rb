@@ -52,8 +52,5 @@ module Mandrill
 end
 
 if defined?(ActionMailer)
-  puts "adding delivery method"
   ActionMailer::Base.add_delivery_method(:mandrill, Mandrill::MandrillDeliveryHandler)
-else
-  puts "not defined"
 end
