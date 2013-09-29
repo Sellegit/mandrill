@@ -30,18 +30,16 @@ module Mandrill
       message_payload = {
         :track_opens => settings[:track_opens],
         :track_clicks => settings[:track_clicks],
-        :message => {
-          :subject => message.subject,
-          :from_name => message.header['from-name'].blank? ? settings[:from_name] : message.header['from-name'],
-          :from_email => message.from.first,
-          :to => message.to.map {|email| { :email => email, :name => email } },
-          :headers => {'Reply-To' => message.reply_to.nil? ? nil : message.reply_to }
-        }
+        :subject => message.subject,
+        :from_name => message.header['from-name'].blank? ? settings[:from_name] : message.header['from-name'],
+        :from_email => message.from.first,
+        :to => message.to.map {|email| { :email => email, :name => email } },
+        :headers => {'Reply-To' => message.reply_to.nil? ? nil : message.reply_to }
       }
-      message_payload[:message][:bcc_address] = message.bcc.first if message.bcc && !message.bcc.empty?
+      message_payload[:bcc_address] = message.bcc.first if message.bcc && !message.bcc.empty?
       [:html, :text].each do |format|
         content = get_content_for(message, format)
-        message_payload[:message][format] = content if content
+        message_payload[format] = content if content
       end
 
       message_payload[:tags] = settings[:tags] if settings[:tags]
