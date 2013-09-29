@@ -4,6 +4,7 @@ require 'json'
 
 require 'mandrill/errors'
 require 'mandrill/api'
+require 'mandrill/handler'
 
 module Mandrill
     class API
