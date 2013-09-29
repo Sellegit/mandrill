@@ -7,7 +7,6 @@ module Mandrill
     end
 
     def deliver!(message)
-      binding.pry
       api_key = message.header['api-key'].blank? ? settings[:api_key] : message.header['api-key']
       
       message_payload = get_message_payload(message)
