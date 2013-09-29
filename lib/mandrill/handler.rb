@@ -22,6 +22,9 @@ module Mandrill
       }
       
       content = message.send(:"#{format.to_s}_part")
+      if content
+        content = content.raw_source
+      end
       content ||= message.body if message.mime_type == mime_types[format]
       content
     end
