@@ -46,6 +46,9 @@ module Mandrill
       end
 
       message_payload[:tags] = settings[:tags] if settings[:tags]
+      if message.header['X-MC-Tags']
+        message_payload[:tags] = message.header['X-MC-Tags'].value.split(',')
+      end
       message_payload
     end
   end
