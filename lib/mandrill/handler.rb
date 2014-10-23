@@ -49,6 +49,9 @@ module Mandrill
       if message.header['X-MC-Tags']
         message_payload[:tags] = message.header['X-MC-Tags'].value.split(',')
       end
+      if message.header['X-MC-Subaccount']
+        message_payload[:subaccount] = message.header['X-MC-Subaccount'].value.to_s
+      end
       message_payload
     end
   end
